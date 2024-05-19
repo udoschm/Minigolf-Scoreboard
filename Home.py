@@ -31,17 +31,21 @@ for i in range(player_count):
     player_name = st.text_input(f'Name von Spieler {i + 1}', key=f'player_name_{i}')
     player_names.append(player_name)
 
+# Sicherstellen, dass alle Spielernamen eindeutig und nicht leer sind
+unique_player_names = [name if name else f'Spieler {i + 1}' for i, name in enumerate(player_names)]
+player_names = list(pd.unique(unique_player_names))  # Entfernt Duplikate
+
 # Initialisierung der Datenstruktur für die Punkte
 player_points = {name: [0] * 18 for name in player_names}
 
 # Eingabe der Punkte für jedes Spiel und jeden Spieler
 for game in range(18):
     with st.expander(f'Bahn {game + 1}'):
-        for player_name in player_names:
+        for i, player_name in enumerate(player_names):
             points = st.select_slider(
                 f'Versuche für {player_name} auf Bahn {game + 1}',
                 options=[1, 2, 3, 4, 5, 6, 7],
-                key=f'{player_name}_game_{game}'
+                key=f'{player_name}_{i}_game_{game}'
             )
             player_points[player_name][game] = points
 
