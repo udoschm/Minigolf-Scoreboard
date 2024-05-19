@@ -36,10 +36,10 @@ player_points = {name: [0] * 18 for name in player_names}
 
 # Eingabe der Punkte für jedes Spiel und jeden Spieler
 for game in range(18):
-    with st.expander(f'Spiel {game + 1}'):
+    with st.expander(f'Bahn {game + 1}'):
         for player_name in player_names:
             points = st.select_slider(
-                f'Versuche für {player_name} im Spiel {game + 1}',
+                f'Versuche für {player_name} auf Bahn {game + 1}',
                 options=[1, 2, 3, 4, 5, 6, 7],
                 key=f'{player_name}_game_{game}'
             )
